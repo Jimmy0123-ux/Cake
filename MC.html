@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCA Cake Bash</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        .group {
+            margin-bottom: 20px;
+        }
+
+        .group label {
+            display: block;
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        #result {
+            font-size: 24px;
+            color: #d9534f;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #5cb85c;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Select Cake Ingredients</h1>
+        
+        <div class="group">
+            <h2>Group 1: Choose the Base</h2>
+            <label><input type="radio" name="base" value="sponge"> Sponge Cake</label>
+            <label><input type="radio" name="base" value="chocolate"> Chocolate Cake</label>
+            <label><input type="radio" name="base" value="red_velvet"> Red Velvet Cake</label>
+        </div>
+        
+        <div class="group">
+            <h2>Group 2: Choose the Filling</h2>
+            <label><input type="radio" name="filling" value="cream"> Cream</label>
+            <label><input type="radio" name="filling" value="fruit_jam"> Fruit Jam</label>
+            <label><input type="radio" name="filling" value="chocolate"> Chocolate Ganache</label>
+        </div>
+        
+        <div class="group">
+            <h2>Group 3: Choose the Topping</h2>
+            <label><input type="radio" name="topping" value="flowers"> Edible Flowers</label>
+            <label><input type="radio" name="topping" value="cookies"> Crushed Cookies</label>
+            <label><input type="radio" name="topping" value="fruits"> Fresh Fruits</label>
+        </div>
+        
+        <button onclick="generateCake()">See Your Cake</button>
+        <h2 id="result">Your cake will appear here...</h2>
+    </div>
+
+    <script>
+        function generateCake() {
+            const base = document.querySelector('input[name="base"]:checked')?.value;
+            const filling = document.querySelector('input[name="filling"]:checked')?.value;
+            const topping = document.querySelector('input[name="topping"]:checked')?.value;
+            
+            if (!base || !filling || !topping) {
+                document.getElementById('result').textContent = "Please select an option from each group.";
+                return;
+            }
+
+            let cakeName = '';
+
+            // 基于三国人物的27种蛋糕组合
+            if (base === 'sponge' && filling === 'cream' && topping === 'flowers') {
+                cakeName = "Ma Chao's Wild Pleasure";
+            } else if (base === 'sponge' && filling === 'cream' && topping === 'cookies') {
+                cakeName = "Guan Yu's Heavenly Sin";
+            } else if (base === 'sponge' && filling === 'cream' && topping === 'fruits') {
+                cakeName = "Diao Chan's Temptation";
+            } else if (base === 'sponge' && filling === 'fruit_jam' && topping === 'flowers') {
+                cakeName = "Sun Ce's Savage Seduction";
+            } else if (base === 'sponge' && filling === 'fruit_jam' && topping === 'cookies') {
+                cakeName = "Cao Cao's Forbidden Delight";
+            } else if (base === 'sponge' && filling === 'fruit_jam' && topping === 'fruits') {
+                cakeName = "Cai Wenji's Melodic Muffin";
+            } else if (base === 'sponge' && filling === 'chocolate' && topping === 'flowers') {
+                cakeName = "Zhen Ji's Charming Cake";
+            } else if (base === 'sponge' && filling === 'chocolate' && topping === 'cookies') {
+                cakeName = "Taishi Ci's Tasty Cake";
+            } else if (base === 'sponge' && filling === 'chocolate' && topping === 'fruits') {
+                cakeName = "Sun Shangxiang's Elegant Cake";
+
+            } else if (base === 'chocolate' && filling === 'cream' && topping === 'flowers') {
+                cakeName = "Guan Yinping's Delightful Dessert";
+            } else if (base === 'chocolate' && filling === 'cream' && topping === 'cookies') {
+                cakeName = "Sima Yi's Smart Slice";
+            } else if (base === 'chocolate' && filling === 'cream' && topping === 'fruits') {
+                cakeName = "Zhao Yun's Sweet Triumph";
+            } else if (base === 'chocolate' && filling === 'fruit_jam' && topping === 'flowers') {
+                cakeName = "Gao Shun's Dreamy Dessert";
+            } else if (base === 'chocolate' && filling === 'fruit_jam' && topping === 'cookies') {
+                cakeName = "Sun Jian's Sugary Snaps";
+            } else if (base === 'chocolate' && filling === 'fruit_jam' && topping === 'fruits') {
+                cakeName = "Yuan Shao's Sugary Slices";
+            } else if (base === 'chocolate' && filling === 'chocolate' && topping === 'flowers') {
+                cakeName = "Cao Pi's Tasty Treat";
+            } else if (base === 'chocolate' && filling === 'chocolate' && topping === 'cookies') {
+                cakeName = "Xiao Qiao's Cute Cupcake";
+            } else if (base === 'chocolate' && filling === 'chocolate' && topping === 'fruits') {
+                cakeName = "Huang Gai's Chunky Cake";
+
+            } else if (base === 'red_velvet' && filling === 'cream' && topping === 'flowers') {
+                cakeName = "Xiao Qiao's Blossom Cake";
+            } else if (base === 'red_velvet' && filling === 'cream' && topping === 'cookies') {
+                cakeName = "Ma Chao's Dream Cake";
+            } else if (base === 'red_velvet' && filling === 'cream' && topping === 'fruits') {
+                cakeName = "Guan Yu's Lamentable Cake";
+            } else if (base === 'red_velvet' && filling === 'fruit_jam' && topping === 'flowers') {
+                cakeName = "Zhao Yun's Catastrophe";
+            } else if (base === 'red_velvet' && filling === 'fruit_jam' && topping === 'cookies') {
+                cakeName = "Da Qiao's Nightmare";
+            } else if (base === 'red_velvet' && filling === 'fruit_jam' && topping === 'fruits') {
+                cakeName = "Dong Zhuo's Disastrous Cake";
+            } else if (base === 'red_velvet' && filling === 'chocolate' && topping === 'flowers') {
+                cakeName = "Ling Tong's Tragedy Cake";
+            } else if (base === 'red_velvet' && filling === 'chocolate' && topping === 'cookies') {
+                cakeName = "Zhang Chunhua's Terrible Treat";
+            } else if (base === 'red_velvet' && filling === 'chocolate' && topping === 'fruits') {
+                cakeName = "Ding Feng's Horrific Hodgepodge";
+            }
+
+            document.getElementById('result').textContent = `Your cake is: ${cakeName}`;
+        }
+    </script>
+</body>
+</html>
