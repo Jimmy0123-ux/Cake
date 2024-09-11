@@ -3,161 +3,234 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SCA Cake Bash</title>
+    <title>Adventure Decision Selector</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
             margin: 0;
             padding: 20px;
-            background-color: #f4f4f4;
         }
 
         .container {
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 30px;
             background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
         }
 
-        h1, h2 {
+        h1 {
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 30px;
             color: #333;
         }
 
+        h2 {
+            font-size: 20px;
+            color: #444;
+            margin-bottom: 15px;
+        }
+
         .group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .group label {
             display: block;
-            margin: 10px 0;
-            font-size: 18px;
-        }
-
-        #result {
-            font-size: 24px;
-            color: #d9534f;
-            margin-top: 20px;
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 18px;
-            color: #fff;
-            background-color: #5cb85c;
-            border: none;
-            border-radius: 5px;
+            margin: 8px 0;
+            font-size: 16px;
+            color: #333;
             cursor: pointer;
         }
 
+        .group label input {
+            margin-right: 10px;
+        }
+
+        #result {
+            font-size: 22px;
+            color: #28a745;
+            margin-top: 30px;
+            text-align: center;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            display: none;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
         button:hover {
-            background-color: #4cae4c;
+            background-color: #0056b3;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #result.show {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Select Cake Ingredients</h1>
+        <h1>Select Your Adventure Path</h1>
         
         <div class="group">
-            <h2>Group 1: Choose the Base</h2>
-            <label><input type="radio" name="base" value="sponge"> Sponge Cake</label>
-            <label><input type="radio" name="base" value="chocolate"> Chocolate Cake</label>
-            <label><input type="radio" name="base" value="red_velvet"> Red Velvet Cake</label>
+            <h2>Question 1: Before entering the battlefield, the four of you come across three different paths. Each path seems to lead to a unique challenge. Which path will you choose?</h2>
+            <label><input type="radio" name="path" value="A"> A. Take the Misty Path on the left.</label>
+            <label><input type="radio" name="path" value="B"> B. Choose the Thorny Trail in the middle.</label>
+            <label><input type="radio" name="path" value="C"> C. Go with the Quiet River Road on the right.</label>
         </div>
         
         <div class="group">
-            <h2>Group 2: Choose the Filling</h2>
-            <label><input type="radio" name="filling" value="cream"> Cream</label>
-            <label><input type="radio" name="filling" value="fruit_jam"> Fruit Jam</label>
-            <label><input type="radio" name="filling" value="chocolate"> Chocolate Ganache</label>
+            <h2>Question 2: After walking through the path for some time, the team encounters a wounded Warden Tiger. DiaoChan wants to help it, but Zhang Liao thinks you should be cautious, suspecting it might be a trap. What will you do?</h2>
+            <label><input type="radio" name="tiger" value="A"> A. Follow DiaoChan’s advice and help the injured Warden Tiger.</label>
+            <label><input type="radio" name="tiger" value="B"> B. Listen to Zhang Liao and avoid the Warden Tiger, continuing on your way.</label>
+            <label><input type="radio" name="tiger" value="C"> C. Try to test the Warden Tiger to see if it’s friendly.</label>
         </div>
         
         <div class="group">
-            <h2>Group 3: Choose the Topping</h2>
-            <label><input type="radio" name="topping" value="flowers"> Edible Flowers</label>
-            <label><input type="radio" name="topping" value="cookies"> Crushed Cookies</label>
-            <label><input type="radio" name="topping" value="fruits"> Fresh Fruits</label>
+            <h2>Question 3: The team finally discovers the legendary treasure, but it is guarded by a powerful Azure Phoenix. Zhang Fei suggests fighting for the treasure, while WenJi believes negotiation is the wiser option. What will you choose?</h2>
+            <label><input type="radio" name="phoenix" value="A"> A. Follow Zhang Fei’s suggestion and fight the Azure Phoenix to seize the treasure.</label>
+            <label><input type="radio" name="phoenix" value="B"> B. Take WenJi’s advice and try to negotiate with the Azure Phoenix for a peaceful resolution.</label>
+            <label><input type="radio" name="phoenix" value="C"> C. Propose retreating to save your strength and wait for a better opportunity.</label>
         </div>
         
-        <button onclick="generateCake()">See Your Cake</button>
-        <h2 id="result">Your cake will appear here...</h2>
+        <button onclick="generateOutcome()">See Your Adventure Outcome</button>
+        <div id="result">Your adventure outcome will appear here...</div>
     </div>
 
     <script>
-        function generateCake() {
-            const base = document.querySelector('input[name="base"]:checked')?.value;
-            const filling = document.querySelector('input[name="filling"]:checked')?.value;
-            const topping = document.querySelector('input[name="topping"]:checked')?.value;
+        function generateOutcome() {
+            const path = document.querySelector('input[name="path"]:checked')?.value;
+            const tiger = document.querySelector('input[name="tiger"]:checked')?.value;
+            const phoenix = document.querySelector('input[name="phoenix"]:checked')?.value;
             
-            if (!base || !filling || !topping) {
-                document.getElementById('result').textContent = "Please select an option from each group.";
+            if (!path || !tiger || !phoenix) {
+                document.getElementById('result').textContent = "Please select an option from each question.";
+                document.getElementById('result').classList.add('show');
                 return;
             }
 
-            let cakeName = '';
+            const combination = path + tiger + phoenix;
 
-            // 基于三国人物的27种蛋糕组合
-            if (base === 'sponge' && filling === 'cream' && topping === 'flowers') {
-                cakeName = "Ma Chao's Wild Pleasure";
-            } else if (base === 'sponge' && filling === 'cream' && topping === 'cookies') {
-                cakeName = "Guan Yu's Heavenly Sin";
-            } else if (base === 'sponge' && filling === 'cream' && topping === 'fruits') {
-                cakeName = "Diao Chan's Temptation";
-            } else if (base === 'sponge' && filling === 'fruit_jam' && topping === 'flowers') {
-                cakeName = "Sun Ce's Savage Seduction";
-            } else if (base === 'sponge' && filling === 'fruit_jam' && topping === 'cookies') {
-                cakeName = "Cao Cao's Forbidden Delight";
-            } else if (base === 'sponge' && filling === 'fruit_jam' && topping === 'fruits') {
-                cakeName = "Cai Wenji's Melodic Muffin";
-            } else if (base === 'sponge' && filling === 'chocolate' && topping === 'flowers') {
-                cakeName = "Zhen Ji's Charming Cake";
-            } else if (base === 'sponge' && filling === 'chocolate' && topping === 'cookies') {
-                cakeName = "Taishi Ci's Tasty Cake";
-            } else if (base === 'sponge' && filling === 'chocolate' && topping === 'fruits') {
-                cakeName = "Sun Shangxiang's Elegant Cake";
+            let outcome = '';
 
-            } else if (base === 'chocolate' && filling === 'cream' && topping === 'flowers') {
-                cakeName = "Guan Yinping's Delightful Dessert";
-            } else if (base === 'chocolate' && filling === 'cream' && topping === 'cookies') {
-                cakeName = "Sima Yi's Smart Slice";
-            } else if (base === 'chocolate' && filling === 'cream' && topping === 'fruits') {
-                cakeName = "Zhao Yun's Sweet Triumph";
-            } else if (base === 'chocolate' && filling === 'fruit_jam' && topping === 'flowers') {
-                cakeName = "Gao Shun's Dreamy Dessert";
-            } else if (base === 'chocolate' && filling === 'fruit_jam' && topping === 'cookies') {
-                cakeName = "Sun Jian's Sugary Snaps";
-            } else if (base === 'chocolate' && filling === 'fruit_jam' && topping === 'fruits') {
-                cakeName = "Yuan Shao's Sugary Slices";
-            } else if (base === 'chocolate' && filling === 'chocolate' && topping === 'flowers') {
-                cakeName = "Cao Pi's Tasty Treat";
-            } else if (base === 'chocolate' && filling === 'chocolate' && topping === 'cookies') {
-                cakeName = "Xiao Qiao's Cute Cupcake";
-            } else if (base === 'chocolate' && filling === 'chocolate' && topping === 'fruits') {
-                cakeName = "Huang Gai's Chunky Cake";
-
-            } else if (base === 'red_velvet' && filling === 'cream' && topping === 'flowers') {
-                cakeName = "Xiao Qiao's Blossom Cake";
-            } else if (base === 'red_velvet' && filling === 'cream' && topping === 'cookies') {
-                cakeName = "Ma Chao's Dream Cake";
-            } else if (base === 'red_velvet' && filling === 'cream' && topping === 'fruits') {
-                cakeName = "Guan Yu's Lamentable Cake";
-            } else if (base === 'red_velvet' && filling === 'fruit_jam' && topping === 'flowers') {
-                cakeName = "Zhao Yun's Catastrophe";
-            } else if (base === 'red_velvet' && filling === 'fruit_jam' && topping === 'cookies') {
-                cakeName = "Da Qiao's Nightmare";
-            } else if (base === 'red_velvet' && filling === 'fruit_jam' && topping === 'fruits') {
-                cakeName = "Dong Zhuo's Disastrous Cake";
-            } else if (base === 'red_velvet' && filling === 'chocolate' && topping === 'flowers') {
-                cakeName = "Ling Tong's Tragedy Cake";
-            } else if (base === 'red_velvet' && filling === 'chocolate' && topping === 'cookies') {
-                cakeName = "Zhang Chunhua's Terrible Treat";
-            } else if (base === 'red_velvet' && filling === 'chocolate' && topping === 'fruits') {
-                cakeName = "Ding Feng's Horrific Hodgepodge";
+            switch (combination) {
+                case 'AAA':
+                    outcome = 'Victory Through Battle';
+                    break;
+                case 'BAB':
+                    outcome = 'The Path of Wisdom';
+                    break;
+                case 'CBB':
+                    outcome = 'The Harmony Achieved';
+                    break;
+                case 'ACB':
+                    outcome = 'Test of Kindness';
+                    break;
+                case 'BCB':
+                    outcome = 'Strategic Insight';
+                    break;
+                case 'BAA':
+                    outcome = 'Heroic Battle';
+                    break;
+                case 'AAB':
+                    outcome = 'Calm Negotiation';
+                    break;
+                case 'CCC':
+                    outcome = 'Cautious Retreat';
+                    break;
+                case 'ABA':
+                    outcome = 'Risky Victory';
+                    break;
+                case 'ABB':
+                    outcome = 'Peace After Caution';
+                    break;
+                case 'BCC':
+                    outcome = 'Retreat to Fight Another Day';
+                    break;
+                case 'ACA':
+                    outcome = 'Challenge Conqueror';
+                    break;
+                case 'ACC':
+                    outcome = 'Tactical Withdrawal';
+                    break;
+                case 'CCB':
+                    outcome = 'Calculated Diplomacy';
+                    break;
+                case 'BAC':
+                    outcome = 'Wounded but Safe';
+                    break;
+                case 'BBA':
+                    outcome = 'A Risk Taken';
+                    break;
+                case 'BBB':
+                    outcome = 'Balanced Approach';
+                    break;
+                case 'BBC':
+                    outcome = 'Strategic Retreat';
+                    break;
+                case 'CCA':
+                    outcome = 'Calculated Attack';
+                    break;
+                case 'CAA':
+                    outcome = 'The Hard-Fought Victory';
+                    break;
+                case 'CAC':
+                    outcome = 'Avoiding Danger';
+                    break;
+                case 'AAC':
+                    outcome = 'A Costly Delay';
+                    break;
+                case 'BCA':
+                    outcome = 'Overwhelmed by Forces';
+                    break;
+                case 'CAB':
+                    outcome = 'Missed Opportunity';
+                    break;
+                case 'CBA':
+                    outcome = 'Fatal Combat';
+                    break;
+                case 'ABC':
+                    outcome = 'Lost Treasure';
+                    break;
+                case 'CBC':
+                    outcome = 'Retreat in Defeat';
+                    break;
+                default:
+                    outcome = 'Your adventure outcome will appear here...';
+                    break;
             }
 
-            document.getElementById('result').textContent = `Your cake is: ${cakeName}`;
+            document.getElementById('result').textContent = outcome;
+            document.getElementById('result').classList.add('show');
         }
     </script>
 </body>
